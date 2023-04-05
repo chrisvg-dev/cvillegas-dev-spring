@@ -7,6 +7,13 @@ pipeline {
             }
         }
 
+        stage('Clean docker') {
+            steps {
+                sh 'docker stop spring-boot-docker'
+                sh 'docker rm spring-boot-docker'
+            }
+        }
+
         stage('Docker create') {
             steps {
                 sh 'docker build -t spring-boot-docker .'
