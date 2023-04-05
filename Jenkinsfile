@@ -16,10 +16,11 @@ pipeline {
             steps {
                 sh '''#!/bin/bash
                     if [ -n "$(docker ps -f "name=spring-boot-docker" -f "status=running" -q )" ]; then
-                    echo "the container is running!"
-                    else
-                    docker compose -f spring.docker.yml up -d
+                        echo "The container is running!"
+                        docker stop spring-boot-docker
+                        docker rm spring-boot-docker
                     fi
+                    docker compose -f spring.docker.yml up -d
                 '''
             }
         }
