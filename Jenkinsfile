@@ -14,7 +14,14 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                sh 'docker compose -f spring.docker.yml up -d'
+                sh(returnStdout: true, script: '''#!/bin/bash
+                    if [ -n "$(docker ps -f "name=spring-boot-docker" -f "status=running" -q )" ]; then
+                    echo "the container is running!"
+                    else
+                    docker compose -f spring.docker.yml up -d
+                    fi
+                '''.stripIndent())
+                }
             }
         }
     }
