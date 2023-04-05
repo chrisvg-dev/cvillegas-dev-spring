@@ -1,0 +1,23 @@
+version: '3.5'
+
+services:
+  spring-app:
+    container_name: spring-boot-docker
+    image: spring-boot-docker
+    volumes:
+      - spring:/data/spring
+    ports:
+      - "9191:9191"
+    networks:
+      - spring-cloud-network
+    restart: unless-stopped
+    build:
+      context: spring-boot-docker
+      dockerfile: Dockerfile
+
+networks:
+  spring-cloud-network:
+    driver: bridge
+volumes:
+  spring:
+

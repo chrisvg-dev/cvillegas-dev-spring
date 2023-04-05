@@ -12,9 +12,9 @@ pipeline {
             }
         }
 
-        stage('Deploy within docker') {
+        stage('Deploy within docker compose') {
             steps {
-                sh 'docker run --name backend -p 9191:8080 spring-boot-docker'
+                sh 'docker-compose -f spring.docker.yml -d up'
             }
         }
     }
