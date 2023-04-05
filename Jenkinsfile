@@ -14,7 +14,7 @@ pipeline {
 
         stage('Deploy within docker compose') {
             steps {
-                sh 'docker-compose -f spring.docker.yml -d up'
+                sh 'docker compose -f spring.docker.yml -d up'
             }
         }
     }
