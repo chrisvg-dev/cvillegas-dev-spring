@@ -21,7 +21,6 @@ pipeline {
                     docker compose -f spring.docker.yml up -d
                     fi
                 '''.stripIndent())
-                }
             }
         }
     }
