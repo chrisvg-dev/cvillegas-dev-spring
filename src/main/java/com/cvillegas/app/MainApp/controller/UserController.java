@@ -13,7 +13,7 @@ import static com.cvillegas.app.MainApp.utils.Constants.OK_STATUS;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping("/api/v1/users")
+@RequestMapping("/api/v1/projects")
 public class UserController {
     private final IProjectService service;
 
