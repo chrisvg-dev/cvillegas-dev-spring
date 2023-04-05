@@ -1,25 +1,8 @@
 version: '3.5'
 
 services:
-  postgres:
-    container_name: postgres_container
-    image: postgres
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: a28d8896f9
-      POSTGRES_DATABASE: cvillegas
-      PGDATA: /data/postgres
-    volumes:
-      - postgres:/data/postgres
-    ports:
-      - "5433:5433"
-    networks:
-      - postgres
-    restart: unless-stopped
   spring-app:
     container_name: spring-boot-docker
-    depends_on:
-      - postgres
     image: spring-boot-docker
     volumes:
       - spring:/data/spring
