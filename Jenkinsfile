@@ -12,5 +12,11 @@ pipeline {
                 sh 'docker build -t spring-boot-docker .'
             }
         }
+
+        stage('Deploy within docker') {
+            steps {
+                sh 'docker run –name backend –publish 8080:8080 spring-boot-docker'
+            }
+        }
     }
 }
