@@ -1,13 +1,5 @@
 pipeline {
-    agent {
-        docker {
-            image 'maven:3.8.3-openjdk-11'
-            args '-v $HOME/.m2:/root/.m2 -v /usr/share/maven:/usr/share/maven'
-        }
-    }
-    tools {
-        maven 'maven'
-    }
+    agent any
     stages {
         stage('Maven Build') {
             steps {
