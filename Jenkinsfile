@@ -6,13 +6,13 @@ pipeline {
                 sh 'mvn clean package'
             }
         }
-        stage('Docker create') {
+        stage('Docker Image') {
             steps {
                 sh 'docker build -t spring-boot-docker .'
             }
         }
 
-        stage('Deploy within docker compose') {
+        stage('Deploy') {
             steps {
                 sh 'docker compose -f spring.docker.yml up -d'
             }
