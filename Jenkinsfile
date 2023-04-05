@@ -6,6 +6,13 @@ pipeline {
                 sh 'mvn clean package'
             }
         }
+
+        stage('Maven Test') {
+            steps {
+                sh 'mvn test'
+            }
+        }
+
         stage('Docker Image') {
             steps {
                 sh 'docker build -t spring-boot-docker .'
