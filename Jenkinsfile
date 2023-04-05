@@ -15,7 +15,7 @@ pipeline {
 
         stage('Deploy within docker') {
             steps {
-                sh 'docker run --name backend -p 8080:8080 spring-boot-docker'
+                sh 'docker run --name backend -p 9191:8080 spring-boot-docker'
             }
         }
     }
