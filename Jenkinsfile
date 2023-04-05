@@ -6,5 +6,11 @@ pipeline {
                 sh 'mvn clean install'
             }
         }
+
+        stage('Docker create') {
+            steps {
+                sh 'docker build -t spring-boot-docker .'
+            }
+        }
     }
 }
