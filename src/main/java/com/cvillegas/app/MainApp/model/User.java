@@ -1,6 +1,6 @@
 package com.cvillegas.app.MainApp.model;
 
-import com.cvillegas.app.MainApp.security.entity.Rol;
+import com.cvillegas.app.MainApp.security.entity.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -32,7 +32,7 @@ public class User {
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_rol", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "rol_id"))
-    private Set<Rol> roles = new HashSet<>();
+    private Set<Role> roles = new HashSet<>();
 
     public User(String name, String username, String email, String password) {
         this.name = name;

@@ -1,9 +1,8 @@
 package com.cvillegas.app.MainApp.security.service;
 
-import com.cvillegas.app.MainApp.security.entity.Rol;
+import com.cvillegas.app.MainApp.security.entity.Role;
 import com.cvillegas.app.MainApp.security.enums.RolName;
 import com.cvillegas.app.MainApp.security.repository.RolRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,11 +17,11 @@ public class RolService {
         this.rolRepository = rolRepository;
     }
 
-    public Optional<Rol> getByRolNombre(RolName rolNombre){
+    public Optional<Role> getByRolNombre(RolName rolNombre){
         return rolRepository.findByRolName(rolNombre);
     }
 
-    public void save(Rol rol){
+    public void save(Role rol){
         rolRepository.save(rol);
     }
 }
