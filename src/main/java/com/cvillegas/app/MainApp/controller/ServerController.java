@@ -11,7 +11,7 @@ import static com.cvillegas.app.MainApp.utils.Constants.*;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping("/api/v1/server")
+@RequestMapping("/info/server")
 public class ServerController {
 
     @GetMapping
