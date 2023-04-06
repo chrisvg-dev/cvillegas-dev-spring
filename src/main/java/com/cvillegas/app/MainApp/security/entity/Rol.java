@@ -1,5 +1,6 @@
 package com.cvillegas.app.MainApp.security.entity;
 
+import com.cvillegas.app.MainApp.security.enums.RolName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,8 +15,8 @@ import javax.validation.constraints.NotNull;
 public class Rol {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     @NotNull
     @Enumerated(EnumType.STRING)
-    private RolNombre rolNombre;
+    private RolName rolName;
 }

@@ -20,17 +20,24 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @NotNull
-    private String nombre;
+    private String name;
     @NotNull
     @Column(unique = true)
-    private String nombreUsuario;
+    private String username;
     @NotNull
     private String email;
     @NotNull
     private String password;
     @NotNull
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "usuario_rol", joinColumns = @JoinColumn(name = "usuario_id"),
+    @JoinTable(name = "user_rol", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "rol_id"))
     private Set<Rol> roles = new HashSet<>();
+
+    public User(String name, String username, String email, String password) {
+        this.name = name;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+    }
 }
