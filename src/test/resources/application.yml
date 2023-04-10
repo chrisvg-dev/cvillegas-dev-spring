@@ -1,0 +1,11 @@
+spring:
+  jpa:
+    defer-datasource-initialization: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create-drop
+
+# security
+jwt:
+  secret: secret
+  expiration: 36000

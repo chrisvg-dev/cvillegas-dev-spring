@@ -1,15 +1,15 @@
 pipeline {
     agent any
     stages {
-        stage('Maven Build') {
-            steps {
-                sh 'mvn clean package'
-            }
-        }
-
         stage('Maven Test') {
             steps {
                 sh 'mvn test'
+            }
+        }
+
+        stage('Maven Build') {
+            steps {
+                sh 'mvn clean package -D"spring-boot.run.profiles"=prod'
             }
         }
 
