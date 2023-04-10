@@ -9,7 +9,7 @@ pipeline {
 
         stage('Maven Build') {
             steps {
-                sh 'mvn clean package -D"spring-boot.run.profiles"=prod'
+                sh 'mvn clean package -D"spring-boot.run.arguments"="--spring.profiles.active=prod"'
             }
         }
 
