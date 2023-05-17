@@ -8,5 +8,6 @@ import java.util.Optional;
 
 public interface ISettingsService {
     Map<String, String> findByKey(String key) throws Exception;
+    Map<String, String> findAll(String key) throws Exception;
     List<Settings> findAllSettings();
 }

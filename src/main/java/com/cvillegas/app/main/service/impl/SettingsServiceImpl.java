@@ -36,6 +36,11 @@ public class SettingsServiceImpl implements ISettingsService {
     }
 
     @Override
+    public Map<String, String> findAll(String key) throws Exception {
+        return null;
+    }
+
+    @Override
     public List<Settings> findAllSettings() {
         return this.repository.findAll();
     }
