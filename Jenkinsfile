@@ -6,6 +6,11 @@ pipeline {
                 sh 'mvn test'
             }
         }
+        stage('Setup HTTPS') {
+            steps {
+                sh 'cp /home/keystore.p12 keystore.p12'
+            }
+        }
 
         stage('Maven Build') {
             steps {
