@@ -1,2 +1,3 @@
 ## Keystore
-keytool -importkeystore -srckeystore cvillegas.jks -destkeystore cvillegas.jks -deststoretype pkcs12 -file file.cer
+1. openssl pkcs12 -inkey file.key -in file.cer -export -out intermediate_keys.pkcs12 
+2. keytool -importkeystore -srckeystore intermediate_keys.pkcs12 -srcstoretype pkcs12 -destkeystore keystore.jks
