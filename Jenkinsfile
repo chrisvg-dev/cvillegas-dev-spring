@@ -8,7 +8,7 @@ pipeline {
         }
         stage('Setup HTTPS') {
             steps {
-                sh 'cp /home/cvillegas.p12 src/main/resources/cvillegas.p12'
+                sh 'cp /home/cvillegas.jks src/main/resources/cvillegas.jks'
             }
         }
 
