@@ -8,7 +8,7 @@ pipeline {
         }
         stage('Setup HTTPS') {
             steps {
-                sh 'cp /home/keystore.p12 keystore.p12'
+                sh 'cp /home/keystore.p12 src/main/resources/keystore.p12'
             }
         }
 
