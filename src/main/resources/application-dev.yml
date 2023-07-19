@@ -2,6 +2,6 @@ spring:
   profiles:
     active: dev
   datasource:
-    url: jdbc:postgresql://localhost:5432/cvillegas
+    url: jdbc:postgresql://cvillegas-dev.com:5432/cvillegas
     username: postgres
     password: a28d8896f9

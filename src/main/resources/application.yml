@@ -1,11 +1,6 @@
 server:
   port: 9191
     # https
-  ssl:
-    key-store: classpath:keystore.jks
-    key-store-type: PKCS12
-    key-store-password: cvillegas-dev
-    key-password: cvillegas-dev
 ### DATABASE CONFIGURATION
 spring:
   profiles:
@@ -16,7 +11,7 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQL10Dialect
     generate-ddl: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: create-drop
     show-sql: true
     properties:
       hibernate:
