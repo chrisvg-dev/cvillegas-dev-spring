@@ -11,17 +11,17 @@ spring:
     generate-ddl: true
     hibernate:
       ddl-auto: update
-    show-sql: true
+    show-sql: false
     properties:
       hibernate:
-        format_sql: true
+        format_sql: false
   main:
     allow-circular-references: true
   config:
     use-legacy-processing: true
-logging:
-  level:
-    org.hibernate.SQL: debug
+#logging:
+  #level:
+    #org.hibernate.SQL: debug
 
 # security
 jwt:
