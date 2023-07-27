@@ -63,7 +63,7 @@ public class CourseServiceImpl implements ICourseService {
     @Override
     public String deleteCourseById(Long id) {
         Course course = this.courseRepository.findById(id).orElse(null);
-        log.info( "You are about to delete this record {}", course.toString() );
+        log.info( "You are about to delete this course id={}", id );
         if (Objects.isNull(course)) return "The course you are looking for does not exist";
         this.courseRepository.deleteById( course.getId() );
         log.info( "Record with this id {} was deleted", course.getId() );

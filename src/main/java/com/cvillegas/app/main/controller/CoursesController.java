@@ -46,10 +46,16 @@ public class CoursesController {
     @PostMapping(value = "/putCertificate", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
     public ResponseEntity<?> saveCourse(@RequestPart("course") CourseDto course, @RequestPart("file") MultipartFile file) throws IOException {
         LOG.info( "{} was received", course );
-        if ( Objects.isNull( file ) ) {
-            return new ResponseEntity<>("This request has no file to be saved.", HttpStatus.BAD_REQUEST);
+        if ( Objects.isNull( file ) ) return new ResponseEntity<>("This request has no file to be saved.", HttpStatus.BAD_REQUEST);
+
+        Course courseSaved = this.courseService.saveCourse( course, file );
+        BasicResponseDto basicResponseDto;
+        if ( Objects.isNull( courseSaved ) )  {
+            basicResponseDto = new BasicResponseDto(HttpStatus.BAD_REQUEST, "There was an error. The records could not br saved.");
         }
-        return ResponseEntity.ok( this.courseService.saveCourse( course, file ) );
+        basicResponseDto = new BasicResponseDto(HttpStatus.OK, "Record saved");
+
+        return ResponseEntity.ok( basicResponseDto );
     }
 
     @DeleteMapping("/{id}")
