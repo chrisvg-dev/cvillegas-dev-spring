@@ -8,7 +8,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-@Getter
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class CourseDto {
     private Long id;
     private String name;

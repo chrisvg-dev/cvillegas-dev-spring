@@ -16,7 +16,7 @@ public class JwtEntryPoint implements AuthenticationEntryPoint {
 
     @Override
     public void commence(HttpServletRequest req, HttpServletResponse res, AuthenticationException e) throws IOException {
-        logger.error("Error {}", e.getMessage());
+        logger.error("Error: {}", e.getMessage());
         res.sendError(HttpServletResponse.SC_UNAUTHORIZED, "You have no authorization to access to this page...");
     }
 }

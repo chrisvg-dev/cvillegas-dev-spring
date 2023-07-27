@@ -1,6 +1,7 @@
 package com.cvillegas.app.main.controller;
 
 import com.cvillegas.app.main.dto.BasicResponseDto;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +18,7 @@ public class ServerController {
     @GetMapping
     public ResponseEntity<Object> index() {
         BasicResponseDto basicResponse = BasicResponseDto.builder()
-                .code(OK_STATUS).message("Server is working...").build();
+                .code(HttpStatus.OK).message("Server is working...").build();
         return ResponseEntity.ok(basicResponse);
     }
 }
