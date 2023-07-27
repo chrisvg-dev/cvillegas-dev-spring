@@ -3,7 +3,7 @@ server:
 ### DATABASE CONFIGURATION
 spring:
   profiles:
-    active: dev #@appProfile@
+    active: @appProfile@
   datasource:
     driver-class-name: org.postgresql.Driver
   jpa:
