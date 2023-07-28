@@ -82,7 +82,7 @@ public class AuthController {
             String jwt = jwtProvider.generateToken(authentication);
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
             JwtDto jwtDto = new JwtDto(HttpStatus.OK, jwt, userDetails.getUsername(), "Successfully logged", false, userDetails.getAuthorities());
-            CookieUtil.create(httpServletResponse, cookieName, jwt, false, -1, "https://cvillegas-dev.com");
+            CookieUtil.create(httpServletResponse, cookieName, jwt, false, -1, "cvillegas-dev.com");
             return ResponseEntity.ok(jwtDto);
         } catch (Exception e) {
             String exception = "";
