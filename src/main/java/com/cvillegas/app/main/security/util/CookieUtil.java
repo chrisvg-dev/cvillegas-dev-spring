@@ -22,7 +22,7 @@ public class CookieUtil {
         cookie.setPath("/");
         cookie.setHttpOnly(true);
         cookie.setMaxAge(1);
-        cookie.setDomain("localhost");
+        cookie.setDomain("https://cvillegas-dev.com");
         httpServletResponse.addCookie(cookie);
     }
 }
