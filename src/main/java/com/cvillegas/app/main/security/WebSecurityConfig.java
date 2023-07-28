@@ -68,7 +68,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().configurationSource(request -> {
                     CorsConfiguration configuration = new CorsConfiguration();
-                    configuration.setAllowedOrigins(List.of("http://localhost:4200"));
+                    configuration.setAllowedOrigins(List.of("http://localhost:4200", "https://cvillegas-dev.com"));
                     configuration.setAllowedMethods(List.of("HEAD", "GET", "POST", "PUT", "DELETE", "PATCH","OPTIONS"));
                     configuration.setAllowCredentials(true);
                     configuration.addExposedHeader("Message");
