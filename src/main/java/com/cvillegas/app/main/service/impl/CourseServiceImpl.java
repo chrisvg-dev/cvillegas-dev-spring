@@ -6,6 +6,7 @@ import com.cvillegas.app.main.dto.CriteriaDto;
 import com.cvillegas.app.main.model.Course;
 import com.cvillegas.app.main.model.repository.ICourseRepository;
 import com.cvillegas.app.main.service.ICourseService;
+import com.cvillegas.app.main.utils.Base64Converter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.stereotype.Service;
@@ -72,7 +73,7 @@ public class CourseServiceImpl implements ICourseService {
 
     private String convertFileToBase64( MultipartFile certificate ) throws IOException {
         String fileFormat = "data:image;base64,%s";
-        String certificateBase64 = Base64.encodeBase64String( certificate.getBytes() );
+        String certificateBase64 = Base64Converter.convertToString(certificate);
         String cleanedBase64 = String.format( fileFormat, certificateBase64 );
         return cleanedBase64;
     }
