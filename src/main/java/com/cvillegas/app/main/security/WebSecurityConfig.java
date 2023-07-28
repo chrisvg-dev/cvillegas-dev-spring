@@ -3,7 +3,6 @@ package com.cvillegas.app.main.security;
 import com.cvillegas.app.main.security.jwt.JwtEntryPoint;
 import com.cvillegas.app.main.security.jwt.JwtTokenFilter;
 import com.cvillegas.app.main.security.service.UserDetailsServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -28,11 +27,14 @@ import java.util.List;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-    @Autowired
-    UserDetailsServiceImpl userDetailsService;
+    private final UserDetailsServiceImpl userDetailsService;
 
-    @Autowired
-    JwtEntryPoint jwtEntryPoint;
+    private final JwtEntryPoint jwtEntryPoint;
+
+    public WebSecurityConfig(JwtEntryPoint jwtEntryPoint, UserDetailsServiceImpl userDetailsService) {
+        this.jwtEntryPoint = jwtEntryPoint;
+        this.userDetailsService = userDetailsService;
+    }
 
     @Bean
     public JwtTokenFilter jwtTokenFilter(){
@@ -60,11 +62,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    protected AuthenticationManager authenticationManager() throws Exception {
-        return super.authenticationManager();
-    }
-
-    @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().configurationSource(request -> {
                     CorsConfiguration configuration = new CorsConfiguration();
@@ -76,7 +73,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     return configuration;
         }).and().csrf().disable()
         .authorizeRequests()
-        .antMatchers(new String[]{"/auth/**", "/data/my-courses/**", "/apps/**"}).permitAll()
+        .antMatchers("/auth/**", "/data/my-courses/**", "/apps/**", "/info/**", "/data/**").permitAll()
         .anyRequest().authenticated()
         .and()
         .exceptionHandling().authenticationEntryPoint(jwtEntryPoint)
