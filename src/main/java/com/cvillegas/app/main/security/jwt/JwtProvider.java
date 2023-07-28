@@ -10,6 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 @Component
@@ -28,7 +29,12 @@ public class JwtProvider {
         long expiration = Long.parseLong(settingsMap.get("JWT_EXPIRATION"));
         String secretKey = settingsMap.get("JWT_SECRET_KEY");
 
-        return Jwts.builder().setSubject(mainUser.getUsername())
+        Map<String, String> claims = new HashMap<>();
+        claims.put("username", mainUser.getUsername());
+        claims.put("name", mainUser.getName());
+
+        return Jwts.builder()
+                .setSubject(mainUser.getUsername())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(new Date().getTime() + expiration * 1000))
                 .signWith(SignatureAlgorithm.HS512, secretKey)

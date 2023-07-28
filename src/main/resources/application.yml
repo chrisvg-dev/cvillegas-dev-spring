@@ -1,5 +1,9 @@
 server:
   port: 9191
+  servlet:
+    session:
+      cookie.http-only: true
+      timeout: 20m
 ### DATABASE CONFIGURATION
 spring:
   profiles:
@@ -19,6 +23,16 @@ spring:
     allow-circular-references: true
   config:
     use-legacy-processing: true
+
+#Spring Session
+  session:
+    jdbc:
+      initialize-schema: always
+      schema: classpath:org/springframework/session/jdbc/schema-@@platform@@.sql
+      table-name: SPRING_SESSION
+    store-type: jdbc
+
+
 #logging:
   #level:
     #org.hibernate.SQL: debug
@@ -27,3 +41,8 @@ spring:
 jwt:
   secret: secret
   expiration: 36000
+  accessTokenCookieName: authToken
+
+
+
+
