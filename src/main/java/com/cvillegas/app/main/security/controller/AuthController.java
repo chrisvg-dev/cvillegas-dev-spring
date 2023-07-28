@@ -41,7 +41,7 @@ public class AuthController {
     private final RolService rolService;
     private final JwtProvider jwtProvider;
 
-    @Value("${jwt.accessTokenCookieName}")
+    @Value("${jwt.accessTokenCookieName:default}")
     private String cookieName;
 
     public AuthController(PasswordEncoder passwordEncoder, AuthenticationManager authenticationManager, UserService usuarioService, RolService rolService, JwtProvider jwtProvider) {

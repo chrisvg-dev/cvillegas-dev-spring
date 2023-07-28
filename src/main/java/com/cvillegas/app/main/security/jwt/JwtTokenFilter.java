@@ -25,7 +25,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
 
-    @Value("${jwt.accessTokenCookieName}")
+    @Value("${jwt.accessTokenCookieName:default}")
     private String cookieName;
 
     @Override
