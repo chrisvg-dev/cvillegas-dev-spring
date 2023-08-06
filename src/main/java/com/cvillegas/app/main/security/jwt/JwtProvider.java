@@ -40,7 +40,7 @@ public class JwtProvider {
                 .compact();
     }
 
-    public String getNombreUsuarioFromToken(String token) throws Exception {
+    public String getUsernameFromToken(String token) throws Exception {
         Map<String, String> settingsMap = this.settingsService.findByKey("JWT");
         String secretKey = settingsMap.get("JWT_SECRET_KEY");
         return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getSubject();
