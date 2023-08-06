@@ -16,4 +16,5 @@ public class Project extends BaseEntity{
     private String title;
     private String username;
     private String component;
+    private String icon;
 }
