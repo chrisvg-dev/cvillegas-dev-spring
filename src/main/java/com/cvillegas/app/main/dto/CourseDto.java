@@ -23,7 +23,7 @@ public class CourseDto {
         this.id = course.getId();
         this.name = course.getName();
         this.description = course.getDescription();
-        this.language = course.getLanguage();
+        this.language = course.getTechnology().getName();
         this.type = course.getType();
         this.platform = course.getPlatform();
     }

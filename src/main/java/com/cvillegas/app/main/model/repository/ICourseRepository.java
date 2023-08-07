@@ -15,7 +15,7 @@ public interface ICourseRepository extends JpaRepository<Course, Long> {
     @Query("SELECT new com.cvillegas.app.main.dto.CourseDto(c) FROM Course c")
     List<CourseDto> findBy();
 
-    @Query("SELECT new com.cvillegas.app.main.dto.CourseDto(c) FROM Course c WHERE c.language = :language")
+    @Query("SELECT new com.cvillegas.app.main.dto.CourseDto(c) FROM Course c")
     List<CourseDto> findByLanguage(String language);
     @Query("SELECT c.file FROM Course c WHERE c.id = :id")
     String findCertificateById(Long id);
