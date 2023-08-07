@@ -12,7 +12,7 @@ import java.util.List;
 
 @Repository
 public interface ICourseRepository extends JpaRepository<Course, Long> {
-    @Query("SELECT new com.cvillegas.app.main.dto.CourseDto(c) FROM Course c")
+    @Query("SELECT new com.cvillegas.app.main.dto.CourseDto(c) FROM Course c ORDER BY c.id DESC")
     List<CourseDto> findBy();
 
     @Query("SELECT new com.cvillegas.app.main.dto.CourseDto(c) FROM Course c")
