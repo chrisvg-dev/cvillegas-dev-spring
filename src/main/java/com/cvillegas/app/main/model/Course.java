@@ -20,7 +20,11 @@ public class Course extends BaseEntity {
     private Technology technology;
 
     private String type;
-    private String platform;
+
+    @ManyToOne
+    @JoinColumn(name = "platform")
+    private Platform platform;
+
     @Column(length=10485760)
     private String file;
 }

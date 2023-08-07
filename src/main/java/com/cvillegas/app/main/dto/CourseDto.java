@@ -25,6 +25,6 @@ public class CourseDto {
         this.description = course.getDescription();
         this.language = course.getTechnology().getName();
         this.type = course.getType();
-        this.platform = course.getPlatform();
+        this.platform = course.getPlatform().getName();
     }
 }

@@ -55,7 +55,7 @@ public class CourseServiceImpl implements ICourseService {
         course.setType(courseDetailsDto.getType() );
         //course.setLanguage(courseDetailsDto.getLanguage() );
         course.setFile( cleanedBase64 );
-        course.setPlatform( courseDetailsDto.getPlatform() );
+        //course.setPlatform( courseDetailsDto.getPlatform() );
         course.setCreatedAt( new Date() );
         course.setUpdatedAt( LocalDateTime.now() );
         return courseRepository.save(course);
