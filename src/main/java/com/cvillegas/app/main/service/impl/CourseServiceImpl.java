@@ -52,7 +52,7 @@ public class CourseServiceImpl implements ICourseService {
         Course course = new Course();
         course.setName(courseDetailsDto.getName() );
         course.setDescription(courseDetailsDto.getDescription() );
-        course.setType(courseDetailsDto.getType() );
+        //course.setType(courseDetailsDto.getType() );
         //course.setLanguage(courseDetailsDto.getLanguage() );
         course.setFile( cleanedBase64 );
         //course.setPlatform( courseDetailsDto.getPlatform() );

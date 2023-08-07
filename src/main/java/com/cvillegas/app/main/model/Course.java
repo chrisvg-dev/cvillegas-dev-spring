@@ -19,7 +19,9 @@ public class Course extends BaseEntity {
     @JoinColumn(name = "technology")
     private Technology technology;
 
-    private String type;
+    @ManyToOne
+    @JoinColumn(name = "courseType")
+    private Platform courseType;
 
     @ManyToOne
     @JoinColumn(name = "platform")
