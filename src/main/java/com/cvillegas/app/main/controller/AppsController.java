@@ -4,6 +4,7 @@ import com.cvillegas.app.main.dto.Base64ResponseDto;
 import com.cvillegas.app.main.dto.BasicResponseDto;
 import com.cvillegas.app.main.dto.FileResponseDto;
 import com.cvillegas.app.main.utils.Base64Converter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +21,7 @@ import static com.cvillegas.app.main.utils.Base64Converter.convertToString;
 @RestController
 @RequestMapping("/apps")
 @CrossOrigin(origins = "*")
+@Slf4j
 public class AppsController {
 
     @PostMapping(value = "/base64Converter", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
@@ -35,6 +37,7 @@ public class AppsController {
                 base64ResponseDto.setFileExtension(fileExtension);
                 base64ResponseDto.setFileSize( String.valueOf(item.getSize()) );
                 base64ResponseDto.setBase64(base64);
+                log.info( base64 );
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }

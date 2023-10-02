@@ -31,9 +31,15 @@ spring:
       schema: classpath:org/springframework/session/jdbc/schema-@@platform@@.sql
       table-name: SPRING_SESSION
     store-type: jdbc
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
 
-
-#logging:
+logging:
+  file:
+    name: app.log
+  #logging:
   #level:
     #org.hibernate.SQL: debug
 
