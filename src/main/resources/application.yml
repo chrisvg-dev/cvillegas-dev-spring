@@ -6,6 +6,21 @@ server:
       timeout: 20m
 ### DATABASE CONFIGURATION
 spring:
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: cristianvg9692@gmail.com
+    password: Pa28d8896f9123.1992
+    properties:
+      mail:
+        smtp:
+          port: 25
+          auth: true
+          starttls:
+            enable: true
+            required: true
+        transport:
+          protocol: smtp
   profiles:
     active: @appProfile@
   datasource:
