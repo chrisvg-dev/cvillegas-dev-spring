@@ -17,8 +17,8 @@ public class EmailServiceImpl implements IEmailService {
     @Override
     public void sendSimpleMessage(BaseEmailContentDto emailContent) {
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom(emailContent.getFrom());
-        message.setTo(emailContent.getTo());
+        message.setFrom("notif9692@gmail.com");
+        message.setTo("cristianvg9692@gmail.com");
         message.setSubject(emailContent.getSubject());
         message.setText(emailContent.getText());
         log.info( "Sending {}", message.toString() );
