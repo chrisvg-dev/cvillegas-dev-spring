@@ -1,6 +1,7 @@
 package com.cvillegas.app.main.controller;
 
 import com.cvillegas.app.main.dto.BaseEmailContentDto;
+import com.cvillegas.app.main.dto.Message;
 import com.cvillegas.app.main.service.IEmailService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +21,6 @@ public class EmailSenderController {
     @PostMapping("/sendBasicEmail")
     public ResponseEntity<?> sendBasicEmail(@RequestBody BaseEmailContentDto emailContent){
         emailService.sendSimpleMessage(emailContent);
-
-        return ResponseEntity.ok( "Message was sent..." );
+        return ResponseEntity.ok( new Message("Message was sent..."));
     }
 }
