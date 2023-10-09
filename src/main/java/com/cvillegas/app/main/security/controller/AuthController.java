@@ -44,7 +44,7 @@ public class AuthController {
     @Value("${jwt.accessTokenCookieName:default}")
     private String cookieName;
 
-    @Value("${user.data.domain}")
+    @Value("${user.data.domain:localhost}")
     private String domain;
 
     public AuthController(PasswordEncoder passwordEncoder, AuthenticationManager authenticationManager, UserService usuarioService, RolService rolService, JwtProvider jwtProvider) {
