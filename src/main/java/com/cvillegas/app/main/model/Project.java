@@ -1,8 +1,6 @@
 package com.cvillegas.app.main.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -10,6 +8,7 @@ import javax.persistence.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString @EqualsAndHashCode(callSuper = false)
 @Table(name = "projects")
 public class Project extends BaseEntity{
     private String description;

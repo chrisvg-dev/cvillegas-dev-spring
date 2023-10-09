@@ -19,12 +19,12 @@ public class CookieUtil {
         httpServletResponse.addCookie(cookie);
     }
 
-    public static void clear(HttpServletResponse httpServletResponse, String name) {
+    public static void clear(HttpServletResponse httpServletResponse, String name, String domain) {
         Cookie cookie = new Cookie(name, null);
         cookie.setPath("/");
         cookie.setHttpOnly(true);
         cookie.setMaxAge(1);
-        cookie.setDomain("cvillegas-dev.com");
+        cookie.setDomain(domain);
         httpServletResponse.addCookie(cookie);
     }
 }

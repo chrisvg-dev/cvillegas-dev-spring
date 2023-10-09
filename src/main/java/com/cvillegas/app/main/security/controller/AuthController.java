@@ -44,6 +44,9 @@ public class AuthController {
     @Value("${jwt.accessTokenCookieName:default}")
     private String cookieName;
 
+    @Value("${user.data.domain}")
+    private String domain;
+
     public AuthController(PasswordEncoder passwordEncoder, AuthenticationManager authenticationManager, UserService usuarioService, RolService rolService, JwtProvider jwtProvider) {
         this.passwordEncoder = passwordEncoder;
         this.authenticationManager = authenticationManager;
@@ -82,7 +85,7 @@ public class AuthController {
             String jwt = jwtProvider.generateToken(authentication);
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
             JwtDto jwtDto = new JwtDto(HttpStatus.OK, jwt, userDetails.getUsername(), "Successfully logged", false, userDetails.getAuthorities());
-            CookieUtil.create(httpServletResponse, cookieName, jwt, false, -1, "cvillegas-dev.com");
+            CookieUtil.create(httpServletResponse, cookieName, jwt, false, -1, domain);
             return ResponseEntity.ok(jwtDto);
         } catch (Exception e) {
             String exception = "";
@@ -109,7 +112,7 @@ public class AuthController {
     }
     @GetMapping("/logOut")
     public ResponseEntity<Message> logOut(HttpServletResponse httpServletResponse){
-        CookieUtil.clear(httpServletResponse,cookieName);
+        CookieUtil.clear(httpServletResponse, cookieName, domain);
         return new ResponseEntity<>(new Message("Sesión cerrada"), HttpStatus.OK) ;
     }
 }
