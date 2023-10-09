@@ -11,6 +11,7 @@ spring:
     url: jdbc:postgresql://cvillegas-dev.com:5432/cvillegas
     username: postgres
     password: a28d8896f9
+
 user:
   data:
     domain: cvillegas-dev.com
