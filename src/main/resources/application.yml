@@ -64,6 +64,6 @@ jwt:
   expiration: 36000
   accessTokenCookieName: authToken
 
-
-
-
+user:
+  data:
+    domain: localhost
