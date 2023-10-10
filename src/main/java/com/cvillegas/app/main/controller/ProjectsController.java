@@ -1,6 +1,7 @@
 package com.cvillegas.app.main.controller;
 
 import com.cvillegas.app.main.dto.BasicResponseDto;
+import com.cvillegas.app.main.dto.Message;
 import com.cvillegas.app.main.dto.ProjectDto;
 import com.cvillegas.app.main.model.Project;
 import com.cvillegas.app.main.service.IProjectService;
@@ -39,5 +40,21 @@ public class ProjectsController {
         }
 
         return ResponseEntity.ok( new BasicResponseDto(HttpStatus.BAD_REQUEST, "Error al registrar...") );
+    }
+
+    @DeleteMapping("/delete-project/{id}")
+    public ResponseEntity<?> deleteProject(@PathVariable("id") Long id) {
+        if (id == null) {
+            return ResponseEntity.badRequest().body( new Message("Id must not be null"));
+        }
+
+        log.info( "Deleting record with this id {}", id );
+        try {
+            this.projectService.deleteProject(id);
+            return ResponseEntity.ok( new Message("Record with id "+id+" was deleted.") );
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body( new Message("There was a problem during deletion."));
+        }
+
     }
 }

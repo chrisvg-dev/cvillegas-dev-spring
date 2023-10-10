@@ -8,4 +8,5 @@ import java.util.List;
 public interface IProjectService {
     List<Project> findAllProjects();
     Project saveProject( ProjectDto projectDto );
+    void deleteProject( long id ) throws Exception;
 }

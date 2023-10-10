@@ -73,7 +73,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     return configuration;
         }).and().csrf().disable()
         .authorizeRequests()
-        .antMatchers("/auth/**", "/data/my-courses/**", "/apps/**", "/info/**", "/data/**", "/utils/projects").permitAll()
+        .antMatchers("/auth/**", "/data/my-courses/**", "/apps/**", "/info/**", "/data/**", "/utils/projects", "/helpers/**").permitAll()
         .anyRequest().authenticated()
         .and()
         .exceptionHandling().authenticationEntryPoint(jwtEntryPoint)
