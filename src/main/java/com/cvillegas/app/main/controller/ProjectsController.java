@@ -34,7 +34,7 @@ public class ProjectsController {
     @PostMapping("/add-project")
     public ResponseEntity<?> saveProject(@RequestBody ProjectDto projectDto) {
         Project project = this.projectService.saveProject(projectDto);
-
+        log.info( project + "created" );
         if (Objects.nonNull(project) ) {
             return ResponseEntity.ok(project);
         }

@@ -32,8 +32,8 @@ public class ProjectServiceImpl implements IProjectService {
     @Override
     public Project saveProject(ProjectDto projectDto) {
         Project project = new Project();
-        project.setTitle(project.getTitle());
-        project.setDescription(project.getDescription());
+        project.setTitle(projectDto.getTitle());
+        project.setDescription(projectDto.getDescription());
         project.setIcon("");
         project.setComponent( projectDto.getComponent() );
         Date now = new Date();
