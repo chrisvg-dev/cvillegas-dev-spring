@@ -7,11 +7,6 @@ pipeline {
             }
         }
 
-        stage('Setup HTTPS') {
-            steps {
-                sh 'cp /home/keystore.jks src/main/resources/keystore.jks'
-            }
-        }
 
         stage('Maven Build') {
             steps {
