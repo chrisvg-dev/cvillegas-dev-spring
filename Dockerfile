@@ -1,5 +1,5 @@
-FROM tomcat:latest
-COPY target/cvillegas.war /usr/local/tomcat/webapps/
-COPY server.xml /usr/local/tomcat/conf/
-EXPOSE 9191:9191
-CMD ["catalina.sh", "run"]
+# Choose java 11 as base image
+FROM openjdk:11-jdk-slim
+ADD target/cvillegas.jar /opt/apps/cvillegas/cvillegas.jar
+WORKDIR /opt/apps/cvillegas
+ENTRYPOINT ["java","-jar","cvillegas.jar"]

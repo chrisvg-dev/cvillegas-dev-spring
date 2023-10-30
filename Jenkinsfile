@@ -7,6 +7,11 @@ pipeline {
             }
         }
 
+        stage('SonarQube Analysis') {
+            steps {
+                sh 'mvn clean verify sonar:sonar -Psonar
+            }
+        }
 
         stage('Maven Build') {
             steps {
