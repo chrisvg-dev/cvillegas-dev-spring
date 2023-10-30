@@ -153,8 +153,8 @@
 			<properties>
 				<sonar.host.url>http://localhost:9000/</sonar.host.url>
 				<!--<sonar.projectKey>sqp_873f7591cc8e17532b4798f4e1b1ecf3f597413a</sonar.projectKey>-->
-				<sonar.projectKey>com.cvillegas.app</sonar.projectKey>
-				<sonar.token>sqp_ce6df1b919a8d21ccb9a960d275a0f53a09e3e4a</sonar.token>
+				<sonar.projectKey>com.cvillegas.app:Main</sonar.projectKey>
+				<sonar.token>sqp_37a6d92facf999da0a10c8e332d48cec9a6ecdbc</sonar.token>
 			</properties>
 		</profile>
 		<profile>
