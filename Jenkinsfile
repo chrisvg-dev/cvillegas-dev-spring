@@ -9,7 +9,7 @@ pipeline {
 
         stage('SonarQube Analysis') {
             steps {
-                sh 'mvn clean verify sonar:sonar -Psonar
+                sh 'mvn clean verify sonar:sonar -Psonar'
             }
         }
 
