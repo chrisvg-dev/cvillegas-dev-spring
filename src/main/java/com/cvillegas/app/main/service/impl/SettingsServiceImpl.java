@@ -24,6 +24,8 @@ public class SettingsServiceImpl implements ISettingsService {
     @Override
     public Map<String, String> findByKey(String key) throws Exception {
         List<Settings> settings = this.repository.findByParamContains(key);
+        String sqlExample = "SELECT * FROM settings WHERE param LIKE '%"+key+"%'";
+        String anotherSqlExample = "SELECT * FROM settings WHERE param LIKE '%"+key+"%' OR content LIKE '%"+key+"%'";
         if (settings.isEmpty()) {
             throw new Exception("There is no information in the database");
         }

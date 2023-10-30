@@ -26,7 +26,7 @@ public class AppsController {
 
     @PostMapping(value = "/base64Converter", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     public ResponseEntity<FileResponseDto> convertToBase64(@RequestPart("file[]") MultipartFile[] files) throws IOException {
-
+        
         List<Base64ResponseDto> responseList = Arrays.stream(files).map(item -> {
             Base64ResponseDto base64ResponseDto = new Base64ResponseDto();
             try {
