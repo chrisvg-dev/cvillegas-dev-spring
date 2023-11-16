@@ -148,14 +148,14 @@
 	</build>
 
 	<profiles>
-		<profile>
+		<!--<profile>
 			<id>sonar</id>
 			<properties>
 				<sonar.host.url>http://localhost:9000/</sonar.host.url>
 				<sonar.projectKey>com.cvillegas.app:Main</sonar.projectKey>
 				<sonar.token>sqp_37a6d92facf999da0a10c8e332d48cec9a6ecdbc</sonar.token>
 			</properties>
-		</profile>
+		</profile>-->
 		<profile>
 			<id>dev</id>
 			<properties>
