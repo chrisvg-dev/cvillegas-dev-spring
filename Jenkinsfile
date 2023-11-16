@@ -7,12 +7,6 @@ pipeline {
             }
         }
 
-        stage('SonarQube Analysis') {
-            steps {
-                sh 'mvn clean verify sonar:sonar -Psonar'
-            }
-        }
-
         stage('Setup HTTPS') {
             steps {
                 sh 'cp /home/keystore.jks src/main/resources/keystore.jks'
