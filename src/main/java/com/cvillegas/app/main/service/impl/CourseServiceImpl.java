@@ -1,14 +1,18 @@
 package com.cvillegas.app.main.service.impl;
 
-import com.cvillegas.app.main.dto.CourseDetailsDto;
 import com.cvillegas.app.main.dto.CourseDto;
-import com.cvillegas.app.main.dto.CriteriaDto;
 import com.cvillegas.app.main.model.Course;
+import com.cvillegas.app.main.model.CourseType;
+import com.cvillegas.app.main.model.Platform;
+import com.cvillegas.app.main.model.Technology;
+import com.cvillegas.app.main.model.repository.ICoursePlatformRepository;
 import com.cvillegas.app.main.model.repository.ICourseRepository;
+import com.cvillegas.app.main.model.repository.ICourseTechnologyRepository;
+import com.cvillegas.app.main.model.repository.ICourseTypeRepository;
 import com.cvillegas.app.main.service.ICourseService;
 import com.cvillegas.app.main.utils.Base64Converter;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,15 +26,16 @@ import java.util.Objects;
 @Service
 @Transactional
 @Slf4j
+@AllArgsConstructor
 public class CourseServiceImpl implements ICourseService {
     private final ICourseRepository courseRepository;
+    private final ICourseTypeRepository courseTypeRepository;
+    private final ICourseTechnologyRepository courseTechnologyRepository;
+    private final ICoursePlatformRepository coursePlatformRepository;
 
-    public CourseServiceImpl(ICourseRepository courseRepository) {
-        this.courseRepository = courseRepository;
-    }
     @Override
     public List<CourseDto> findAll(String criteria) {
-        if (criteria.length() > 0) {
+        if (!criteria.isEmpty()) {
             return this.courseRepository.findByLanguage(criteria);
         }
         return this.courseRepository.findBy();
@@ -38,24 +43,26 @@ public class CourseServiceImpl implements ICourseService {
 
     @Override
     public String findCertificateById(Long id) {
-        String certificate = Objects.nonNull( this.courseRepository.findCertificateById(id) )
+        return Objects.nonNull( this.courseRepository.findCertificateById(id) )
                 ? this.courseRepository.findCertificateById(id)
                 : null;
-        return certificate;
     }
 
     @Override
     public Course saveCourse(CourseDto courseDetailsDto, MultipartFile file) throws IOException {
         String cleanedBase64 = convertFileToBase64( file );
+        CourseType courseType = this.courseTypeRepository.findByName(courseDetailsDto.getType()).orElseThrow(() -> new RuntimeException("Course type not found"));
+        Technology technology = this.courseTechnologyRepository.findByName(courseDetailsDto.getLanguage()).orElseThrow(() -> new RuntimeException("Technology not found"));
+        Platform platform = this.coursePlatformRepository.findByName(courseDetailsDto.getPlatform()).orElseThrow(() -> new RuntimeException("Platform not found"));
 
         // Fill new object to be saved
         Course course = new Course();
         course.setName(courseDetailsDto.getName() );
         course.setDescription(courseDetailsDto.getDescription() );
-        //course.setType(courseDetailsDto.getType() );
-        //course.setLanguage(courseDetailsDto.getLanguage() );
+        course.setCourseType(courseType);
+        course.setTechnology(technology);
         course.setFile( cleanedBase64 );
-        //course.setPlatform( courseDetailsDto.getPlatform() );
+        course.setPlatform( platform );
         course.setCreatedAt( new Date() );
         course.setUpdatedAt( LocalDateTime.now() );
         return courseRepository.save(course);

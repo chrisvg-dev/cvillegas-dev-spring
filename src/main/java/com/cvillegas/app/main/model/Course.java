@@ -21,7 +21,7 @@ public class Course extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "courseType")
-    private Platform courseType;
+    private CourseType courseType;
 
     @ManyToOne
     @JoinColumn(name = "platform")

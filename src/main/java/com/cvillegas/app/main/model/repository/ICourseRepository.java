@@ -14,7 +14,6 @@ import java.util.List;
 public interface ICourseRepository extends JpaRepository<Course, Long> {
     @Query("SELECT new com.cvillegas.app.main.dto.CourseDto(c) FROM Course c ORDER BY c.id DESC")
     List<CourseDto> findBy();
-
     @Query("SELECT new com.cvillegas.app.main.dto.CourseDto(c) FROM Course c")
     List<CourseDto> findByLanguage(String language);
     @Query("SELECT c.file FROM Course c WHERE c.id = :id")
