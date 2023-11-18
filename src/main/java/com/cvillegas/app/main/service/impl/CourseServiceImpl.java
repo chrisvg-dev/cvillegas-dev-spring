@@ -1,6 +1,8 @@
 package com.cvillegas.app.main.service.impl;
 
 import com.cvillegas.app.main.dto.CourseDto;
+import com.cvillegas.app.main.dto.CourseRequestDto;
+import com.cvillegas.app.main.dto.CoursesWrapper;
 import com.cvillegas.app.main.model.Course;
 import com.cvillegas.app.main.model.CourseType;
 import com.cvillegas.app.main.model.Platform;
@@ -34,11 +36,30 @@ public class CourseServiceImpl implements ICourseService {
     private final ICoursePlatformRepository coursePlatformRepository;
 
     @Override
-    public List<CourseDto> findAll(String criteria) {
+    public CoursesWrapper findAll(String criteria) {
         if (!criteria.isEmpty()) {
-            return this.courseRepository.findByLanguage(criteria);
+            return CoursesWrapper.builder()
+                    .courses( this.courseRepository.findByLanguage(criteria) )
+                    .platforms( this.coursePlatformRepository.findAll() )
+                    .technologies( this.courseTechnologyRepository.findAll() )
+                    .types( this.courseTypeRepository.findAll() )
+                    .build();
         }
-        return this.courseRepository.findBy();
+        return buildResponse();
+    }
+
+    @Override
+    public CoursesWrapper findAll() {
+        return buildResponse();
+    }
+
+    private CoursesWrapper buildResponse() {
+        return CoursesWrapper.builder()
+                .courses( this.courseRepository.findBy() )
+                .platforms( this.coursePlatformRepository.findAll() )
+                .technologies( this.courseTechnologyRepository.findAll() )
+                .types( this.courseTypeRepository.findAll() )
+                .build();
     }
 
     @Override
@@ -49,11 +70,11 @@ public class CourseServiceImpl implements ICourseService {
     }
 
     @Override
-    public Course saveCourse(CourseDto courseDetailsDto, MultipartFile file) throws IOException {
+    public Course saveCourse(CourseRequestDto courseDetailsDto, MultipartFile file) throws IOException {
         String cleanedBase64 = convertFileToBase64( file );
-        CourseType courseType = this.courseTypeRepository.findByName(courseDetailsDto.getType()).orElseThrow(() -> new RuntimeException("Course type not found"));
-        Technology technology = this.courseTechnologyRepository.findByName(courseDetailsDto.getLanguage()).orElseThrow(() -> new RuntimeException("Technology not found"));
-        Platform platform = this.coursePlatformRepository.findByName(courseDetailsDto.getPlatform()).orElseThrow(() -> new RuntimeException("Platform not found"));
+        CourseType courseType = this.courseTypeRepository.findById(courseDetailsDto.getType()).orElseThrow(() -> new RuntimeException("Course type not found"));
+        Technology technology = this.courseTechnologyRepository.findById(courseDetailsDto.getLanguage()).orElseThrow(() -> new RuntimeException("Technology not found"));
+        Platform platform = this.coursePlatformRepository.findById(courseDetailsDto.getPlatform()).orElseThrow(() -> new RuntimeException("Platform not found"));
 
         // Fill new object to be saved
         Course course = new Course();
