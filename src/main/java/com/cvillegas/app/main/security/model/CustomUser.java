@@ -1,6 +1,5 @@
-package com.cvillegas.app.main.security.entity;
+package com.cvillegas.app.main.security.model;
 
-import com.cvillegas.app.main.model.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,41 +8,40 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class PrincipalUser implements UserDetails {
+public class CustomUser implements UserDetails {
     private String name;
     private String username;
     private String email;
     private String password;
     private Collection<? extends GrantedAuthority> authorities;
 
-    public PrincipalUser(String nombre, String nombreUsuario, String email, String password, Collection<? extends GrantedAuthority> authorities) {
-        this.name = nombre;
-        this.username = nombreUsuario;
+    public CustomUser(String name, String email, String password, Collection<? extends GrantedAuthority> authorities) {
+        this.name = name;
+        this.username = email;
         this.email = email;
         this.password = password;
         this.authorities = authorities;
     }
 
-    public static PrincipalUser build(User user){
+    public static CustomUser build(User user){
         List<GrantedAuthority> authorities =
-                user.getRoles().stream().map(rol -> new SimpleGrantedAuthority(rol
-                        .getRolName().name())).collect(Collectors.toList());
-        return new PrincipalUser(user.getName(), user.getUsername(), user.getEmail(), user.getPassword(), authorities);
+                user.getRoles().stream().map(rol -> new SimpleGrantedAuthority(rol.getRoleName().name())).collect(Collectors.toList());
+        return new CustomUser(user.getName(), user.getEmail(), user.getPassword(), authorities);
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return authorities;
+        return this.authorities;
     }
 
     @Override
     public String getPassword() {
-        return password;
+        return this.password;
     }
 
     @Override
     public String getUsername() {
-        return username;
+        return this.username;
     }
 
     @Override
@@ -64,13 +62,5 @@ public class PrincipalUser implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getEmail() {
-        return email;
     }
 }

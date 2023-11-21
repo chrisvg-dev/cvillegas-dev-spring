@@ -6,6 +6,8 @@ import com.cvillegas.app.main.dto.CourseRequestDto;
 import com.cvillegas.app.main.dto.CoursesWrapper;
 import com.cvillegas.app.main.model.Course;
 import com.cvillegas.app.main.service.ICourseService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -31,7 +33,7 @@ public class CoursesController {
     }
 
     @GetMapping({"", "/criteria/{criteria}"})
-    public ResponseEntity<CoursesWrapper> findAll(Map<String, String> pathVariables) {
+    public ResponseEntity<CoursesWrapper> findAll(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Map<String, String> pathVariables) {
         if (pathVariables.containsKey("criteria")) {
             return ResponseEntity.ok( this.courseService.findAll(pathVariables.get("criteria").toUpperCase()) );
 

@@ -1,14 +1,13 @@
 package com.cvillegas.app.main.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import javax.persistence.Entity;
+import lombok.*;
+import jakarta.persistence.Entity;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Payment extends BaseEntity {

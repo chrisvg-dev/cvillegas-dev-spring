@@ -2,7 +2,7 @@ package com.cvillegas.app.main.model;
 
 import lombok.*;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 @Data

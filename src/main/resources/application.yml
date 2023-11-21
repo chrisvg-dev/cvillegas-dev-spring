@@ -55,12 +55,13 @@ logging:
   #logging:
   #level:
     #org.hibernate.SQL: debug
-  level:
-    com.cvillegas.app.main: debug
-    root: error
+  #level:
+  #  com.cvillegas.app.main: debug
+  #  root: error
 
 # security
-jwt:
-  secret: secret
-  expiration: 36000
-  accessTokenCookieName: authToken
+security:
+  jwt:
+    secret-key: secret
+    expiration-time: 36000
+    accessTokenCookieName: authToken

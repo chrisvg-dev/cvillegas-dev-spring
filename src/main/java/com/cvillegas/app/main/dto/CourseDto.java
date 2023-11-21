@@ -4,10 +4,6 @@ import com.cvillegas.app.main.model.BaseEntity;
 import com.cvillegas.app.main.model.Course;
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
