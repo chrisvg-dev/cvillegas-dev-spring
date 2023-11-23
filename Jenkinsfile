@@ -2,11 +2,13 @@ pipeline {
     agent any
     stages {
         stage('Maven set up') {
-            sh '''#!/bin/bash
-                export M2_HOME=/opt/maven
-                export PATH=$PATH:$M2_HOME/bin
-                mvn --version
-            '''
+            steps {
+                sh '''#!/bin/bash
+                    export M2_HOME=/opt/maven
+                    export PATH=$PATH:$M2_HOME/bin
+                    mvn --version
+                '''
+            }
         }
         stage('Maven Test') {
             steps {
