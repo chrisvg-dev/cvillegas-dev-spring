@@ -12,13 +12,13 @@ pipeline {
         }
         stage('Maven Test') {
             steps {
-                sh 'mvn test'
+                sh '/opt/maven/bin/mvn test'
             }
         }
 
         stage('SonarQube Analysis') {
             steps {
-                sh 'mvn clean verify sonar:sonar -Psonar'
+                sh '/opt/maven/bin/mvn clean verify sonar:sonar -Psonar'
             }
         }
 
@@ -30,7 +30,7 @@ pipeline {
 
         stage('Maven Build') {
             steps {
-                sh 'mvn clean package -Pprod -DskipTests'
+                sh '/opt/maven/bin/mvn clean package -Pprod -DskipTests'
             }
         }
 
