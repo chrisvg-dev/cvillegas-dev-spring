@@ -71,4 +71,26 @@ public class AuthenticationController {
     private Cookie checkSession(HttpServletRequest request) {
         return WebUtils.getCookie(request, cookieName);
     }
+
+    @PostMapping("/refreshToken")
+    public ResponseEntity<BaseResponse> refreshToken(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @RequestBody RefreshTokenRequest request) {
+        log.info("Login request {} was received.", request);
+        Cookie cookie = checkSession(httpServletRequest);
+        if (Objects.nonNull(cookie)) {
+            JwtErrorResponse errorResponse = new JwtErrorResponse();
+            errorResponse.setMessage("There is a session previously associated. Closing it.");
+            return ResponseEntity.badRequest().body(errorResponse);
+        }
+        try {
+            JwtAuthenticationResponse response = authenticationService.refreshToken(request);
+            log.info("Login response {} was created successfully.", response);
+            CookieUtil.create(httpServletResponse, cookieName, response.getToken(), false, -1, domain);
+            log.info("HttpOnly cookie for JWT authentication was set.");
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            JwtErrorResponse errorResponse = new JwtErrorResponse();
+            errorResponse.setMessage(e.getMessage());
+            return ResponseEntity.badRequest().body(errorResponse);
+        }
+    }
 }

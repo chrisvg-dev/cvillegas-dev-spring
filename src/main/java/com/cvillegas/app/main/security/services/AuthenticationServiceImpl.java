@@ -2,6 +2,7 @@ package com.cvillegas.app.main.security.services;
 
 import com.cvillegas.app.main.security.dto.JwtAuthenticationResponse;
 import com.cvillegas.app.main.security.dto.LoginRequestDto;
+import com.cvillegas.app.main.security.dto.RefreshTokenRequest;
 import com.cvillegas.app.main.security.dto.UserRegistrationDto;
 import com.cvillegas.app.main.security.model.CustomUser;
 import com.cvillegas.app.main.security.model.User;
@@ -13,6 +14,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.HashMap;
 
@@ -50,6 +52,20 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         response.setStatus(HttpStatus.OK);
         return response;
 
+    }
+
+    public JwtAuthenticationResponse refreshToken(@RequestBody RefreshTokenRequest request) {
+        String email = jwtService.extractUsername(request.getToken());
+        User user = userRepository.findByEmail(email).orElseThrow();
+        CustomUser customUser = CustomUser.build(user);
+        if ( jwtService.isTokenValid(request.getToken(), customUser) ) {
+            var jwt = jwtService.generateToken(customUser);
+            JwtAuthenticationResponse response = new JwtAuthenticationResponse(jwt, request.getToken());
+            response.setMessage("Authentication successful");
+            response.setStatus(HttpStatus.OK);
+            return response;
+        }
+        return null;
     }
 
 }
