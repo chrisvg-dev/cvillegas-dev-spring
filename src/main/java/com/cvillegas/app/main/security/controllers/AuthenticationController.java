@@ -8,11 +8,12 @@ import com.cvillegas.app.main.security.util.CookieUtil;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.WebUtils;
 
@@ -24,24 +25,21 @@ import java.util.Objects;
 @Slf4j
 public class AuthenticationController {
     private final AuthenticationService authenticationService;
+    @Value("${security.jwt.accessTokenCookieName}") private String cookieName;
+    @Value("${user.data.domain:localhost}") private String domain;
 
-    @Value("${security.jwt.accessTokenCookieName}")
-    private String cookieName; // TODO meter a settings
-
-    @Value("${user.data.domain:localhost}")
-    private String domain; // TODO meter a settings
     @PostMapping("/signup")
-    public ResponseEntity<User> signup(@RequestBody UserRegistrationDto request) {
+    public ResponseEntity<User> signup(@Valid @RequestBody UserRegistrationDto request) {
         return ResponseEntity.ok(authenticationService.signup(request));
     }
 
     @PostMapping("/login")
-    public ResponseEntity<BaseResponse> login(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @RequestBody LoginRequestDto request) {
+    public ResponseEntity<BaseResponse> login(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @Valid @RequestBody LoginRequestDto request) {
         log.info("Login request {} was received.", request);
         Cookie cookie = checkSession(httpServletRequest);
         if (Objects.nonNull(cookie)) {
             JwtErrorResponse errorResponse = new JwtErrorResponse();
-            errorResponse.setMessage("There is a session previously associated. Please log out and try again.");
+            errorResponse.setMessage("There is a session previously associated.");
             return ResponseEntity.badRequest().body(errorResponse);
         }
         try {

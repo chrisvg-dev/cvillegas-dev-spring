@@ -4,6 +4,8 @@ import com.cvillegas.app.main.model.BaseEntity;
 import com.cvillegas.app.main.model.Course;
 import lombok.*;
 
+import java.math.BigInteger;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

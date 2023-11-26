@@ -1,12 +1,17 @@
 package com.cvillegas.app.main.security.services;
 
+import com.cvillegas.app.main.exceptions.RoleNotFoundException;
 import com.cvillegas.app.main.security.dto.JwtAuthenticationResponse;
 import com.cvillegas.app.main.security.dto.LoginRequestDto;
 import com.cvillegas.app.main.security.dto.RefreshTokenRequest;
 import com.cvillegas.app.main.security.dto.UserRegistrationDto;
+import com.cvillegas.app.main.security.enums.ERole;
 import com.cvillegas.app.main.security.model.CustomUser;
+import com.cvillegas.app.main.security.model.Role;
 import com.cvillegas.app.main.security.model.User;
+import com.cvillegas.app.main.security.repository.RoleRepository;
 import com.cvillegas.app.main.security.repository.UserRepository;
+import com.cvillegas.app.main.security.util.CookieUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -24,16 +29,22 @@ import java.util.HashMap;
 public class AuthenticationServiceImpl implements AuthenticationService {
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
 
     public User signup(UserRegistrationDto request){
+        Role role = roleRepository.findByRoleName(ERole.ROLE_USER).orElseThrow(() ->
+                new RoleNotFoundException("Role name not found"));
         User user = new User();
-        user.setName(request.getName());
-        user.setLastName(request.getLastName());
+        user.setName(request.getName().toUpperCase());
+        user.setLastName(request.getLastName().toUpperCase());
         user.setEmail(request.getEmail());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
-        return userRepository.save(user);
+        user.getRoles().add(role);
+        User saved = userRepository.save(user);
+        log.info("User was saved successfully.");
+        return saved;
     }
 
     public JwtAuthenticationResponse login(LoginRequestDto request) {
@@ -50,6 +61,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         JwtAuthenticationResponse response = new JwtAuthenticationResponse(jwt, refreshToken);
         response.setMessage("Authentication successful");
         response.setStatus(HttpStatus.OK);
+        log.info("HttpOnly cookie for JWT authentication was set.");
         return response;
 
     }

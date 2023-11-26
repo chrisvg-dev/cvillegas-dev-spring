@@ -1,9 +1,12 @@
 package com.cvillegas.app.main.security.config;
 
+import com.cvillegas.app.main.security.repository.IAllowedUrlRepository;
 import com.cvillegas.app.main.security.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -18,7 +21,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.csrf.CsrfTokenRequestAttributeHandler;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -33,21 +35,23 @@ public class SecurityConfiguration {
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final UserService userService;
     private final JwtEntryPoint jwtEntryPoint;
+    private final IAllowedUrlRepository urlRepository;
 
     @Bean
+    @Order(Ordered.HIGHEST_PRECEDENCE)
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.sessionManagement(manager -> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
-        var requestHandler = new CsrfTokenRequestAttributeHandler();
-        requestHandler.setCsrfRequestAttributeName("_csrf");
+        //var requestHandler = new CsrfTokenRequestAttributeHandler();
+        //requestHandler.setCsrfRequestAttributeName("_csrf");
         httpSecurity
-                .csrf(AbstractHttpConfigurer::disable)
-                .cors(cors -> corsConfigurationSource())
-                .authorizeHttpRequests(request -> request
-                        .requestMatchers(new String[]{"/greeting", "/api/v1/auth/**"}).permitAll()
-                        .anyRequest().authenticated()
-                )
-                .authenticationProvider(authenticationProvider())
-                .addFilterAfter(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+            .csrf(AbstractHttpConfigurer::disable)
+            .cors(cors -> corsConfigurationSource())
+            .authorizeHttpRequests(request -> request
+                    .requestMatchers("/api/v1/auth/**", "/api/v1/settings/**").permitAll()
+                    .anyRequest().authenticated()
+            )
+            .authenticationProvider(authenticationProvider())
+            .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
         httpSecurity.exceptionHandling( exceptions -> exceptions.authenticationEntryPoint(jwtEntryPoint));
         return httpSecurity.build();
     }

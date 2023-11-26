@@ -2,9 +2,8 @@ package com.cvillegas.app.main.service.impl;
 
 import com.cvillegas.app.main.dto.ProjectDto;
 import com.cvillegas.app.main.model.Project;
-import com.cvillegas.app.main.model.repository.ProjectRepository;
+import com.cvillegas.app.main.model.repository.IProjectRepository;
 import com.cvillegas.app.main.service.IProjectService;
-import lombok.extern.log4j.Log4j;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,9 +17,9 @@ import java.util.Objects;
 @Transactional
 @Slf4j
 public class ProjectServiceImpl implements IProjectService {
-    private final ProjectRepository repository;
+    private final IProjectRepository repository;
 
-    public ProjectServiceImpl(ProjectRepository repository) {
+    public ProjectServiceImpl(IProjectRepository repository) {
         this.repository = repository;
     }
 
@@ -36,8 +35,7 @@ public class ProjectServiceImpl implements IProjectService {
         project.setDescription(projectDto.getDescription());
         project.setIcon("");
         project.setComponent( projectDto.getComponent() );
-        Date now = new Date();
-        project.setCreatedAt( now );
+        project.setCreatedAt( LocalDateTime.now() );
         project.setUpdatedAt(LocalDateTime.now());
         return repository.save(project);
     }

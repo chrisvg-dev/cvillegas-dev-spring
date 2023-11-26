@@ -1,6 +1,10 @@
 package com.cvillegas.app.main.security.model;
 
+import com.cvillegas.app.main.model.BaseEntity;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,25 +18,15 @@ import java.util.Set;
 @NoArgsConstructor
 @Getter
 @Setter
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+public class User extends BaseEntity {
     private String name;
     private String lastName;
+    @Column(unique = true)
     private String email;
     private String password;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "roles_by_user", joinColumns = @JoinColumn(name = "user_id"),
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "roles_per_user", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "rol_id"))
     private Set<Role> roles = new HashSet<>();
-
-    public User(String name, String lastName, String email, String password) {
-        this.name = name;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
-    }
 }

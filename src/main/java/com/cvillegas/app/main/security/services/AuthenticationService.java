@@ -10,7 +10,5 @@ import org.springframework.web.bind.annotation.RequestBody;
 public interface AuthenticationService {
     User signup(UserRegistrationDto request);
     JwtAuthenticationResponse login(LoginRequestDto request);
-
     JwtAuthenticationResponse refreshToken(@RequestBody RefreshTokenRequest request);
-
 }

@@ -1,13 +1,12 @@
 package com.cvillegas.app.main.model.repository;
 
-import com.cvillegas.app.main.model.Settings;
+import com.cvillegas.app.main.model.Setting;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Repository
-public interface SettingsRepository extends JpaRepository<Settings, Long> {
-    List<Settings> findByParamContains(String key);
+public interface ISettingsRepository extends JpaRepository<Setting, Long> {
+    List<Setting> findByParamContains(String key);
 }

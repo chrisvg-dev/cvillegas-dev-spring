@@ -1,5 +1,6 @@
 package com.cvillegas.app.main.security.model;
 
+import com.cvillegas.app.main.model.BaseEntity;
 import com.cvillegas.app.main.security.enums.ERole;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -8,17 +9,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
-@Entity(name = "roles")
+@Entity
 @Getter @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @SuperBuilder
-public class Role {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+@Table(name = "roles", indexes = @Index(columnList = "roleName"))
+public class Role extends BaseEntity {
     @Enumerated(EnumType.STRING)
-    @Column(name = "role_name",unique = true)
+    @Column(unique = true)
     private ERole roleName;
 }

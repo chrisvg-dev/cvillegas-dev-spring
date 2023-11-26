@@ -8,7 +8,6 @@ import jakarta.persistence.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString @EqualsAndHashCode(callSuper = false)
 @Table(name = "projects")
 public class Project extends BaseEntity{
     private String description;

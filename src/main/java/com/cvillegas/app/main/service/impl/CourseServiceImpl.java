@@ -84,7 +84,7 @@ public class CourseServiceImpl implements ICourseService {
         course.setTechnology(technology);
         course.setFile( cleanedBase64 );
         course.setPlatform( platform );
-        course.setCreatedAt( new Date() );
+        course.setCreatedAt( LocalDateTime.now() );
         course.setUpdatedAt( LocalDateTime.now() );
         return courseRepository.save(course);
     }
