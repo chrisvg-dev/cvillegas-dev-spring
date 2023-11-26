@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
@@ -24,10 +25,8 @@ import java.util.List;
 @Slf4j
 public class MainAppApplication implements CommandLineRunner {
 	@Autowired private RoleRepository roleRepository;
-	@Autowired private IAllowedUrlRepository urlRepository;
 	@Autowired private UserRepository userRepository;
 	@Autowired private ISettingsRepository settingsRepository;
-	@Autowired private PasswordEncoder passwordEncoder;
 	public static void main(String[] args) {
 		SpringApplication.run(MainAppApplication.class, args);
 	}
@@ -56,7 +55,7 @@ public class MainAppApplication implements CommandLineRunner {
 				.name("CRISTHIAN")
 				.lastName("VILLEGAS")
 				.email("cristianvg9692@gmail.com")
-				.password(passwordEncoder.encode("Pa28d8896f9#1992"))
+				.password(new BCryptPasswordEncoder().encode("Pa28d8896f9#1992"))
 				.build()
 		);
 
