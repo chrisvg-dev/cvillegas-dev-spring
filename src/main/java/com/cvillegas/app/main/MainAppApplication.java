@@ -41,7 +41,7 @@ public class MainAppApplication implements CommandLineRunner {
 						.description("The authorization cookie name")
 						.build()
 		));
-		this.roleRepository.saveAll(
+		/*this.roleRepository.saveAll(
 				List.of(
 						Role.builder().roleName(ERole.ROLE_ADMIN).build(),
 						Role.builder().roleName(ERole.ROLE_USER).build()
