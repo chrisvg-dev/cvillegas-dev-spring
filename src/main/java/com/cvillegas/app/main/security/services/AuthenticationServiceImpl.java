@@ -17,6 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -54,7 +55,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             log.error(e.getMessage());
         }
 
-        var user = userRepository.findByEmail(request.getEmail()).orElseThrow(() -> new IllegalArgumentException("INvalid credentials"));
+        var user = userRepository.findByEmail(request.getEmail()).orElseThrow(() -> new UsernameNotFoundException("Invalid credentials"));
         var jwt = jwtService.generateToken(CustomUser.build(user));
         var refreshToken = jwtService.generateRefreshToken(new HashMap<>(), CustomUser.build(user));
 
