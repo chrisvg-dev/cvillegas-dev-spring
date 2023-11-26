@@ -34,9 +34,16 @@ pipeline {
             }
         }
 
-        stage('Docker Image') {
+        stage('Docker build') {
             steps {
-                sh 'docker build -t spring-boot-docker .'
+                sh 'docker build -t cvillegas92/spring-boot-docker .'
+            }
+        }
+
+        stage('Docker push') {
+            withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
+                sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
+                sh 'docker push cvillegas92/spring-boot-docker'
             }
         }
 
