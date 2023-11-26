@@ -2,7 +2,7 @@ version: '3.5'
 services:
   spring-app:
     container_name: spring-boot-docker
-    image: cvillegas92/spring-boot-docker
+    image: cvillegas92/cvillegas-backend
     volumes:
       - spring:/data/spring
     ports:
@@ -11,7 +11,7 @@ services:
       - spring-cloud-network
     restart: unless-stopped
     build:
-      context: spring-boot-docker
+      context: cvillegas-backend
       dockerfile: Dockerfile
 
 networks:
