@@ -14,7 +14,7 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @NoArgsConstructor
 @SuperBuilder
-@Table(name = "roles", indexes = @Index(columnList = "roleName"))
+@Table(name = "roles")
 public class Role extends BaseEntity {
     @Enumerated(EnumType.STRING)
     @Column(unique = true)
