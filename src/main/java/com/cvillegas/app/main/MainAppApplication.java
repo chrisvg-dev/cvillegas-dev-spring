@@ -104,7 +104,7 @@ public class MainAppApplication implements CommandLineRunner {
 						.level(Level.ADVANCED)
 						.build()
 		));
-		*/this.projectRepository.saveAll(List.of(
+		this.projectRepository.saveAll(List.of(
 				Project.builder()
                         .title("Personal website")
                         .description("My personal website.")
@@ -112,6 +112,6 @@ public class MainAppApplication implements CommandLineRunner {
 						.url("https://api.cristhianvg.dev/swagger-ui/index.html")
 						.observations("Proyecto personal para compartir mis habilidades y practicar algunas cosas.")
                         .build()
-		));
+		));*/
 	}
 }
