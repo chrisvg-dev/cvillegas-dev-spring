@@ -33,8 +33,6 @@ public class ProjectServiceImpl implements IProjectService {
         Project project = new Project();
         project.setTitle(projectDto.getTitle());
         project.setDescription(projectDto.getDescription());
-        project.setIcon("");
-        project.setComponent( projectDto.getComponent() );
         project.setCreatedAt( LocalDateTime.now() );
         project.setUpdatedAt(LocalDateTime.now());
         return repository.save(project);

@@ -2,14 +2,8 @@ package com.cvillegas.app.main;
 
 import com.cvillegas.app.main.enums.Level;
 import com.cvillegas.app.main.enums.SkillCategory;
-import com.cvillegas.app.main.model.Job;
-import com.cvillegas.app.main.model.Setting;
-import com.cvillegas.app.main.model.TechSkillCategory;
-import com.cvillegas.app.main.model.TechnicalSkill;
-import com.cvillegas.app.main.model.repository.IJobRepository;
-import com.cvillegas.app.main.model.repository.ISettingsRepository;
-import com.cvillegas.app.main.model.repository.ISkillCategoryRepository;
-import com.cvillegas.app.main.model.repository.ITechnicalSkillRepository;
+import com.cvillegas.app.main.model.*;
+import com.cvillegas.app.main.model.repository.*;
 import com.cvillegas.app.main.security.enums.ERole;
 import com.cvillegas.app.main.security.model.AllowedUrl;
 import com.cvillegas.app.main.security.model.Role;
@@ -39,6 +33,7 @@ public class MainAppApplication implements CommandLineRunner {
 	@Autowired private IJobRepository jobRepository;
 	@Autowired private ITechnicalSkillRepository technicalSkillRepository;
 	@Autowired private ISkillCategoryRepository categoryRepository;
+	@Autowired private IProjectRepository projectRepository;
 	public static void main(String[] args) {
 		SpringApplication.run(MainAppApplication.class, args);
 	}
@@ -46,48 +41,8 @@ public class MainAppApplication implements CommandLineRunner {
 	@Override
 	@Transactional
 	public void run(String... args) throws Exception {
-		this.settingsRepository.saveAll(List.of(
-				Setting.builder()
-						.param("AUTHORIZATION_DOMAIN")
-						.content("")
-						.description("The authorization domain")
-						.build(),
-				Setting.builder()
-						.param("AUTHORIZATION_COOKIE_NAME")
-						.content("authToken")
-						.description("The authorization cookie name")
-						.build()
-		));
-		this.roleRepository.saveAll(
-				List.of(
-						Role.builder().roleName(ERole.ROLE_ADMIN).build(),
-						Role.builder().roleName(ERole.ROLE_USER).build()
-				)
-		);
-		this.userRepository.save(User.builder()
-				.name("CRISTHIAN")
-				.lastName("VILLEGAS")
-				.email("cristianvg9692@gmail.com")
-				.password(new BCryptPasswordEncoder().encode("Pa28d8896f9#1992"))
-				.build()
-		);
 
-		this.jobRepository.saveAll(List.of(
-				Job.builder().name("Java Developer").company("C&A Systems S.A. de C.V.").description("Java developer").isCurrent(true).build()
-		));
-
-		this.categoryRepository.saveAll(List.of(
-				TechSkillCategory.builder().skillCategory(SkillCategory.BACKEND).build(),
-				TechSkillCategory.builder().skillCategory(SkillCategory.FRONTEND).build(),
-				TechSkillCategory.builder().skillCategory(SkillCategory.DATABASE).build(),
-				TechSkillCategory.builder().skillCategory(SkillCategory.DEVOPS).build()
-		));
-
-		TechSkillCategory backend = this.categoryRepository.findBySkillCategory(SkillCategory.BACKEND).orElseThrow();
-		TechSkillCategory frontend = this.categoryRepository.findBySkillCategory(SkillCategory.FRONTEND).orElseThrow();
-		TechSkillCategory devops = this.categoryRepository.findBySkillCategory(SkillCategory.DEVOPS).orElseThrow();
-
-		this.technicalSkillRepository.saveAll(List.of(
+	/*	this.technicalSkillRepository.saveAll(List.of(
 				TechnicalSkill.builder()
 						.name("Java")
 						.description("Java")
@@ -121,5 +76,7 @@ public class MainAppApplication implements CommandLineRunner {
 						.level(Level.ADVANCED)
 						.build()
 		));
+
+	 */
 	}
 }
