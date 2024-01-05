@@ -41,8 +41,36 @@ public class MainAppApplication implements CommandLineRunner {
 	@Override
 	@Transactional
 	public void run(String... args) throws Exception {
+		/*this.roleRepository.saveAll(
+				List.of(
+						Role.builder().roleName(ERole.ROLE_ADMIN).build(),
+						Role.builder().roleName(ERole.ROLE_USER).build()
+				)
+		);
+		this.userRepository.save(User.builder()
+				.name("CRISTHIAN")
+				.lastName("VILLEGAS")
+				.email("cristianvg9692@gmail.com")
+				.password(new BCryptPasswordEncoder().encode("Pa28d8896f9#1992"))
+				.build()
+		);
 
-	/*	this.technicalSkillRepository.saveAll(List.of(
+		this.jobRepository.saveAll(List.of(
+				Job.builder().name("Java Developer").company("C&A Systems S.A. de C.V.").description("Java developer").isCurrent(true).build()
+		));
+
+		this.categoryRepository.saveAll(List.of(
+				TechSkillCategory.builder().skillCategory(SkillCategory.BACKEND).build(),
+				TechSkillCategory.builder().skillCategory(SkillCategory.FRONTEND).build(),
+				TechSkillCategory.builder().skillCategory(SkillCategory.DATABASE).build(),
+				TechSkillCategory.builder().skillCategory(SkillCategory.DEVOPS).build()
+		));
+
+		TechSkillCategory backend = this.categoryRepository.findBySkillCategory(SkillCategory.BACKEND).orElseThrow();
+		TechSkillCategory frontend = this.categoryRepository.findBySkillCategory(SkillCategory.FRONTEND).orElseThrow();
+		TechSkillCategory devops = this.categoryRepository.findBySkillCategory(SkillCategory.DEVOPS).orElseThrow();
+
+		this.technicalSkillRepository.saveAll(List.of(
 				TechnicalSkill.builder()
 						.name("Java")
 						.description("Java")
@@ -76,7 +104,14 @@ public class MainAppApplication implements CommandLineRunner {
 						.level(Level.ADVANCED)
 						.build()
 		));
-
-	 */
+		*/this.projectRepository.saveAll(List.of(
+				Project.builder()
+                        .title("Personal website")
+                        .description("My personal website.")
+						.type("API")
+						.url("https://api.cristhianvg.dev/swagger-ui/index.html")
+						.observations("Proyecto personal para compartir mis habilidades y practicar algunas cosas.")
+                        .build()
+		));
 	}
 }
