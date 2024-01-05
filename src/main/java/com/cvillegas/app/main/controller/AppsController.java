@@ -19,30 +19,32 @@ import java.util.stream.Collectors;
 import static com.cvillegas.app.main.utils.Base64Converter.convertToString;
 
 @RestController
-@RequestMapping("${api.prefix}")
+@RequestMapping("/api/v1")
 @Slf4j
 public class AppsController {
 
-    @PostMapping(value = "/apps/base64Converter", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
-    public ResponseEntity<FileResponseDto> convertToBase64(@RequestPart("file[]") MultipartFile[] files) throws IOException {
-        
+    @PostMapping(value = "/apps/base64Converter", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
+    public ResponseEntity<FileResponseDto> convertToBase64(@RequestPart("file[]") MultipartFile[] files)
+            throws IOException {
+
         List<Base64ResponseDto> responseList = Arrays.stream(files).map(item -> {
             Base64ResponseDto base64ResponseDto = new Base64ResponseDto();
             try {
                 String base64 = convertToString(item);
-                String fileExtension = item.getOriginalFilename().substring( item.getOriginalFilename().lastIndexOf(".") +1 );
+                String fileExtension = item.getOriginalFilename()
+                        .substring(item.getOriginalFilename().lastIndexOf(".") + 1);
 
                 base64ResponseDto.setFilename(item.getOriginalFilename());
                 base64ResponseDto.setFileExtension(fileExtension);
-                base64ResponseDto.setFileSize( String.valueOf(item.getSize()) );
+                base64ResponseDto.setFileSize(String.valueOf(item.getSize()));
                 base64ResponseDto.setBase64(base64);
-                log.info( base64 );
+                log.info(base64);
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
             return base64ResponseDto;
         }).collect(Collectors.toList());
-        return ResponseEntity.ok( new FileResponseDto(HttpStatus.OK, responseList) );
+        return ResponseEntity.ok(new FileResponseDto(HttpStatus.OK, responseList));
     }
 
 }

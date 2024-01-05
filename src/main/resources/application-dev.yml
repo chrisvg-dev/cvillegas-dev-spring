@@ -7,6 +7,3 @@ spring:
 user:
   data:
     domain: localhost
-
-api:
-  prefix: /api/v1
