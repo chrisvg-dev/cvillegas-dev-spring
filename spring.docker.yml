@@ -6,7 +6,7 @@ services:
     volumes:
       - spring:/data/spring
     ports:
-      - "9191:9191"
+      - "9292:9292"
     networks:
       - spring-cloud-network
     restart: unless-stopped
