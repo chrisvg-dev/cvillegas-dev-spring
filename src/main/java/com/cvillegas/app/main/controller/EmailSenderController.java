@@ -18,14 +18,15 @@ import org.springframework.web.bind.annotation.RestController;
 import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
-@RequestMapping("${api.prefix}")
+@RequestMapping("/api/v1")
 @AllArgsConstructor
 @Slf4j
 public class EmailSenderController {
     private IEmailService emailService;
 
     @PostMapping("/apps/sendBasicEmail")
-    public BasicResponseDto sendBasicEmail(HttpServletRequest servletRequest, @RequestBody BaseEmailContentDto emailContent){
+    public BasicResponseDto sendBasicEmail(HttpServletRequest servletRequest,
+            @RequestBody BaseEmailContentDto emailContent) {
         String clientIp = servletRequest.getRemoteAddr();
         log.info(clientIp);
         return emailService.sendSimpleMessage(emailContent);

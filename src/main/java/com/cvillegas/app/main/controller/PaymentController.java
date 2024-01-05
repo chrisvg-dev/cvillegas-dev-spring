@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("${api.prefix}")
+@RequestMapping("/api/v1")
 public class PaymentController {
     private final IPaymentService paymentService;
 

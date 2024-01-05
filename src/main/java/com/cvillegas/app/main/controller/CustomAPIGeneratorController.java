@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("${api.prefix}")
+@RequestMapping("/api/v1")
 @RequiredArgsConstructor
 public class CustomAPIGeneratorController {
 
@@ -27,7 +27,7 @@ public class CustomAPIGeneratorController {
         List<Object> list = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             JsonObject object = new JsonObject();
-            for(String item: items.split(",")){
+            for (String item : items.split(",")) {
                 object.addProperty(item, lorem.getWords(3, 5));
             }
             list.add(object);

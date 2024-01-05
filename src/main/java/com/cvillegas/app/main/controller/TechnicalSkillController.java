@@ -14,14 +14,14 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("${api.prefix}")
+@RequestMapping("/api/v1")
 public class TechnicalSkillController {
 
     private final ITechnicalSkillService service;
 
     @GetMapping("/info/skills")
     public ResponseEntity<SkillsWrapperDto> findAll() {
-        return ResponseEntity.ok( this.service.findAll() );
+        return ResponseEntity.ok(this.service.findAll());
     }
 
 }
