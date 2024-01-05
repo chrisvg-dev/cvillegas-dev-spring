@@ -1,5 +1,5 @@
 server:
-  port: 9191
+  port: 9192
   servlet:
     session:
       cookie.http-only: true
@@ -65,3 +65,6 @@ security:
     secret-key: secret
     expiration-time: 36000
     accessTokenCookieName: authToken
+
+api:
+  prefix: /api/v1

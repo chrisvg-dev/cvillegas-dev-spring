@@ -16,17 +16,17 @@ pipeline {
             }
         }
 
-        stage('SonarQube Analysis') {
-            steps {
-                sh '/opt/maven/bin/mvn clean verify sonar:sonar -Psonar'
-            }
-        }
+        //stage('SonarQube Analysis') {
+        //    steps {
+        //        sh '/opt/maven/bin/mvn clean verify sonar:sonar -Psonar'
+        //    }
+       // }
 
-        stage('Setup HTTPS') {
-            steps {
-                sh 'cp /home/keystore.jks src/main/resources/keystore.jks'
-            }
-        }
+        //stage('Setup HTTPS') {
+        //   steps {
+        //        sh 'cp /home/keystore.jks src/main/resources/keystore.jks'
+        //    }
+        //}
 
         stage('Maven Build') {
             steps {

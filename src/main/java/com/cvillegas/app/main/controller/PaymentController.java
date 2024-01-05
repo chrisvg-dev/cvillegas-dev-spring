@@ -12,8 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "*")
-@RequestMapping("/data/monthly-services")
+@RequestMapping("${api.prefix}")
 public class PaymentController {
     private final IPaymentService paymentService;
 
@@ -21,7 +20,7 @@ public class PaymentController {
         this.paymentService = paymentService;
     }
 
-    @GetMapping
+    @GetMapping("/info/monthly-services")
     public ResponseEntity<List<Payment>> findAll() {
         return ResponseEntity.ok(paymentService.findAll());
     }

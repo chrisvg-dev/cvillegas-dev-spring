@@ -23,7 +23,7 @@ import java.util.Objects;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping("/data/my-courses")
+@RequestMapping("${api.prefix}")
 public class CoursesController {
     private static final Logger LOG = LoggerFactory.getLogger( CoursesController.class );
     private final ICourseService courseService;
@@ -32,7 +32,7 @@ public class CoursesController {
         this.courseService = courseService;
     }
 
-    @GetMapping({"", "/criteria/{criteria}"})
+    @GetMapping({"/info/courses", "info/criteria/{criteria}"})
     public ResponseEntity<CoursesWrapper> findAll(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Map<String, String> pathVariables) {
         if (pathVariables.containsKey("criteria")) {
             return ResponseEntity.ok( this.courseService.findAll(pathVariables.get("criteria").toUpperCase()) );
@@ -41,7 +41,7 @@ public class CoursesController {
         return ResponseEntity.ok( this.courseService.findAll() );
     }
 
-    @GetMapping("/getCertificate/{id}")
+    @GetMapping("/info/getCertificate/{id}")
     public ResponseEntity<String> findAll(@PathVariable("id") Long id) {
         return ResponseEntity.ok( this.courseService.findCertificateById(id) );
     }

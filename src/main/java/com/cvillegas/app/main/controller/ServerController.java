@@ -11,11 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 import static com.cvillegas.app.main.utils.Constants.*;
 
 @RestController
-@CrossOrigin(origins = "*")
-@RequestMapping("/info/server")
+@RequestMapping("${api.prefix}")
 public class ServerController {
 
-    @GetMapping
+    @GetMapping("/info/server")
     public ResponseEntity<Object> index() {
         BasicResponseDto basicResponse = BasicResponseDto.builder()
                 .code(HttpStatus.OK).message("Server is working...").build();

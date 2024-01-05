@@ -12,18 +12,18 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/settings")
+@RequestMapping("${api.prefix}/")
 @Slf4j
 @RequiredArgsConstructor
 public class SettingsController {
     private final ISettingsService settingsService;
 
-    @GetMapping("/all")
+    @GetMapping("/info/settings")
     public ResponseEntity<List<Setting>> findAllSettings() {
         return ResponseEntity.ok(settingsService.findAllSettings());
     }
 
-    @PostMapping("/save")
+    @PostMapping("/settings/save")
     public ResponseEntity<BasicResponseDto> save(@RequestBody SettingDto request) {
         return ResponseEntity.ok(settingsService.saveSetting(request));
     }

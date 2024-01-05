@@ -19,12 +19,11 @@ import java.util.stream.Collectors;
 import static com.cvillegas.app.main.utils.Base64Converter.convertToString;
 
 @RestController
-@RequestMapping("/apps")
-@CrossOrigin(origins = "*")
+@RequestMapping("${api.prefix}")
 @Slf4j
 public class AppsController {
 
-    @PostMapping(value = "/base64Converter", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+    @PostMapping(value = "/apps/base64Converter", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     public ResponseEntity<FileResponseDto> convertToBase64(@RequestPart("file[]") MultipartFile[] files) throws IOException {
         
         List<Base64ResponseDto> responseList = Arrays.stream(files).map(item -> {

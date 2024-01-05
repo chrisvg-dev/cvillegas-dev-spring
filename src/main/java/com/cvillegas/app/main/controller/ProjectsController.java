@@ -14,8 +14,7 @@ import java.util.List;
 import java.util.Objects;
 
 @RestController
-@CrossOrigin(origins = "*")
-@RequestMapping("/utils")
+@RequestMapping("${api.prefix}")
 @Slf4j
 public class ProjectsController {
     private final IProjectService projectService;
@@ -24,7 +23,7 @@ public class ProjectsController {
         this.projectService = projectService;
     }
 
-    @GetMapping("/projects")
+    @GetMapping("/info/projects")
     // @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<Project>> index() {
         log.info( "Sending records..." );

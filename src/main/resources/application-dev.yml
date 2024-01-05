@@ -1,9 +1,12 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/cvillegas
-    username: cvillegas
+    url: jdbc:postgresql://cristhianvg.dev:5432/cvillegas
+    username: postgres
     password: a28d8896f9
 
 user:
   data:
     domain: localhost
+
+api:
+  prefix: /api/v1
