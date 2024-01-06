@@ -114,7 +114,7 @@ public class MainAppApplication implements CommandLineRunner {
                         .build()
 		));*/
 		// this.categoryRepository.save(TechSkillCategory.builder().skillCategory(SkillCategory.OTHERS).build());
-		TechSkillCategory cloud = this.categoryRepository.findBySkillCategory(SkillCategory.CLOUD).orElseThrow();
+		//TechSkillCategory cloud = this.categoryRepository.findBySkillCategory(SkillCategory.CLOUD).orElseThrow();
 		/*this.technicalSkillRepository.save(
 				TechnicalSkill.builder()
 						.name("Amazon Web Services")
