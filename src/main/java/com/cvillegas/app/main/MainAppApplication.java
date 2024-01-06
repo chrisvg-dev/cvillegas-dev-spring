@@ -113,5 +113,16 @@ public class MainAppApplication implements CommandLineRunner {
 						.observations("Proyecto personal para compartir mis habilidades y practicar algunas cosas.")
                         .build()
 		));*/
-	}
+		// this.categoryRepository.save(TechSkillCategory.builder().skillCategory(SkillCategory.OTHERS).build());
+		TechSkillCategory cloud = this.categoryRepository.findBySkillCategory(SkillCategory.CLOUD).orElseThrow();
+		/*this.technicalSkillRepository.save(
+				TechnicalSkill.builder()
+						.name("Amazon Web Services")
+						.description("AWS")
+						.category(cloud)
+						.icon("fas fa-code")
+						.styleClass("card l-bg-cherry")
+						.level(Level.MEDIUM)
+						.build());
+	*/}
 }
