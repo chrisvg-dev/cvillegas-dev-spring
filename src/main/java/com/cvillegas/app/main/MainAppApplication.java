@@ -124,5 +124,38 @@ public class MainAppApplication implements CommandLineRunner {
 						.styleClass("card l-bg-cherry")
 						.level(Level.MEDIUM)
 						.build());
-	*/}
+	*/
+		//TechSkillCategory backend = this.categoryRepository.findBySkillCategory(SkillCategory.BACKEND).orElseThrow();
+		//TechSkillCategory frontend = this.categoryRepository.findBySkillCategory(SkillCategory.FRONTEND).orElseThrow();
+		//TechSkillCategory devops = this.categoryRepository.findBySkillCategory(SkillCategory.DEVOPS).orElseThrow();
+		/*this.categoryRepository.saveAll(List.of(
+				TechSkillCategory.builder().skillCategory(SkillCategory.BACKEND).build(),
+				TechSkillCategory.builder().skillCategory(SkillCategory.FRONTEND).build(),
+				TechSkillCategory.builder().skillCategory(SkillCategory.DATABASE).build(),
+				TechSkillCategory.builder().skillCategory(SkillCategory.DEVOPS).build(),
+				TechSkillCategory.builder().skillCategory(SkillCategory.CLOUD).build(),
+				TechSkillCategory.builder().skillCategory(SkillCategory.OTHERS).build()
+		));
+
+		this.roleRepository.saveAll(
+				List.of(
+						Role.builder().roleName(ERole.ROLE_ADMIN).build(),
+						Role.builder().roleName(ERole.ROLE_USER).build()
+				)
+		);
+		TechSkillCategory backend = this.categoryRepository.findBySkillCategory(SkillCategory.BACKEND).orElseThrow();
+		TechSkillCategory frontend = this.categoryRepository.findBySkillCategory(SkillCategory.FRONTEND).orElseThrow();
+		TechSkillCategory devops = this.categoryRepository.findBySkillCategory(SkillCategory.DEVOPS).orElseThrow();
+		TechSkillCategory cloud = this.categoryRepository.findBySkillCategory(SkillCategory.CLOUD).orElseThrow();
+		TechSkillCategory others = this.categoryRepository.findBySkillCategory(SkillCategory.OTHERS).orElseThrow();
+		this.technicalSkillRepository.save(
+				TechnicalSkill.builder()
+						.name("Amazon Web Services")
+						.description("AWS")
+						.category(cloud)
+						.icon("fas fa-code")
+						.styleClass("card l-bg-cherry")
+						.level(Level.MEDIUM)
+						.build());*/
+	}
 }

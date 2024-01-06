@@ -29,7 +29,7 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQL10Dialect
     generate-ddl: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
     show-sql: false
     properties:
       hibernate:
