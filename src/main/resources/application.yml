@@ -4,8 +4,11 @@ server:
     session:
       cookie.http-only: true
       timeout: 20m
+    contextPath: /api/v1
 ### DATABASE CONFIGURATION
 spring:
+  application:
+    name: cvg-backend
   mail:
     host: smtp.gmail.com
     port: 587
@@ -26,7 +29,7 @@ spring:
   datasource:
     driver-class-name: org.postgresql.Driver
   jpa:
-    database-platform: org.hibernate.dialect.PostgreSQL10Dialect
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
     generate-ddl: true
     hibernate:
       ddl-auto: none
@@ -51,18 +54,21 @@ spring:
       enabled: true
       max-file-size: 20MB
 
-logging:
-  #logging:
-  #level:
-    #org.hibernate.SQL: debug
-  #level:
-  #  com.cvillegas.app.main: debug
-  #  root: error
-
 # security
 security:
   jwt:
     secret-key: secret
     expiration-time: 36000
     accessTokenCookieName: authToken
+
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://192.168.1.66:8761/eureka/
+  instance:
+    preferIpAddress: true
+    leaseRenewalIntervalInSeconds: 10
+    leaseExpirationDurationInSeconds: 30
 

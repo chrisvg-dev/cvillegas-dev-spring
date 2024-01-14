@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
-@RequestMapping("/api/v1")
 @AllArgsConstructor
 @Slf4j
 public class EmailSenderController {

@@ -23,7 +23,6 @@ import java.util.Objects;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping("/api/v1")
 public class CoursesController {
     private static final Logger LOG = LoggerFactory.getLogger(CoursesController.class);
     private final ICourseService courseService;

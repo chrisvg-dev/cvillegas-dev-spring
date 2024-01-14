@@ -5,6 +5,7 @@ import com.cvillegas.app.main.dto.Message;
 import com.cvillegas.app.main.dto.ProjectDto;
 import com.cvillegas.app.main.model.Project;
 import com.cvillegas.app.main.service.IProjectService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,14 +15,10 @@ import java.util.List;
 import java.util.Objects;
 
 @RestController
-@RequestMapping("/api/v1")
 @Slf4j
+@RequiredArgsConstructor
 public class ProjectsController {
     private final IProjectService projectService;
-
-    public ProjectsController(IProjectService projectService) {
-        this.projectService = projectService;
-    }
 
     @GetMapping("/info/projects")
     // @PreAuthorize("hasRole('ADMIN')")

@@ -19,7 +19,6 @@ import java.util.stream.Collectors;
 import static com.cvillegas.app.main.utils.Base64Converter.convertToString;
 
 @RestController
-@RequestMapping("/api/v1")
 @Slf4j
 public class AppsController {
 
